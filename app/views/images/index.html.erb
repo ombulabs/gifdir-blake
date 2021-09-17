@@ -12,6 +12,8 @@
   <tbody>
     <% @images.each do |image| %>
       <tr>
+        <td><%= image.id %></td>
+        <td><%= image_tag image.uploaded_image.url %></td>
         <td><%= link_to 'Show', image %></td>
         <td><%= link_to 'Edit', edit_image_path(image) %></td>
         <td><%= link_to 'Destroy', image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -21,5 +23,5 @@
 </table>
 
 <br>
-
+<%= paginate @images %>
 <%= link_to 'New Image', new_image_path %>
