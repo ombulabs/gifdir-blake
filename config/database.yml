@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: ombulabs
+  pool: 5
+  username: postgres
+  password: yosemite26
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: ombulab
+  pool: 5
+  username: postgres
+  password: yosemite26
