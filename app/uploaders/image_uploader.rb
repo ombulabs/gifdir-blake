@@ -3,6 +3,29 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
 
+  include CarrierWave::MiniMagick
+
+  process :resize_to_fill => [40, 40] ,:if => :is_small?
+  process :resize_to_fill => [80, 80]  ,:if => :is_medium?
+  process :resize_to_fill => [120, 120]  ,:if => :is_large?
+
+
+  def is_small? image
+    image = MiniMagick::Image.new(image.path)
+    true if image[:width] < 80 || image[:height] < 80
+  end
+
+  def is_medium? image
+    image = MiniMagick::Image.new(image.path)
+    true if image[:width] < 120 || image[:height] < 120
+  end
+
+  def is_large? image
+    image = MiniMagick::Image.new(image.path)
+    true if image[:width] >= 120 || image[:height] >= 120
+  end
+
+
   # Choose what kind of storage to use for this uploader:
   storage :file
   # storage :fog
@@ -45,3 +68,5 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 end
+
+
