@@ -2,5 +2,22 @@
 
 <%= render 'form', image: @image %>
 
+<%= form_with(model: @image, url: add_tag_image_path(@image), method: :post) do |form| %>
+  <input type="text" name="tag_list"/>
+  <button type="submit" value="Submit">Add Tag</button>
+<% end %>
+
+<hr>
+
+<select>
+  <% @image_tags.each do |tag| %>
+    <option value="<%= tag %>"><%= tag %></option>
+  <% end %>
+</select>
+
+
+<hr>
+
+
 <%= link_to 'Show', @image %> |
 <%= link_to 'Back', images_path %>
