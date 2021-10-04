@@ -1,2 +1,17 @@
 <h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>
+
+
+
+<hr>
+<form method="get" action="/images/">
+  <input type="text" name="tag"/>
+  <select name="tag_list">
+    <option value="">SELECT</option>
+    <% @image_tags.each do |tag| %>
+      <option value="<%= tag %>"><%= tag %></option>
+    <% end %>
+  </select>
+<button typ="submit">Filter</button>
+<hr>
+

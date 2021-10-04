@@ -3,8 +3,18 @@ class ImagesController < ApplicationController
 
   # GET /images or /images.json
   def index
-    page = params[:page] ||= 1
-    @images = Image.page(page).per(2)
+    filter  = params[:tag_list]
+    tag     = params[:tag]
+    if tag.present?
+      images = Image.tagged_with(tag)
+    elsif filter.present?
+      images = Image.tagged_with(filter)
+    else
+      images = Image.all
+    end
+
+    page    = params[:page] ||= 1
+    @images = images.page(page).per(2)
   end
 
   # GET /images/1 or /images/1.json
